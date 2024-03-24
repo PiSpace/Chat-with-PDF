@@ -8,10 +8,14 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGener
 from langchain.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
+from dotenv import load_dotenv
+import google.generativeai as genai
 
 # Set your Google API Key here. It's recommended to use environment variables for security.
+#load_dotenv()
+#os.getenv("GOOGLE_API_KEY")
+#genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 os.environ["GOOGLE_API_KEY"] = "AIzaSyDhaendGvFHUO_YxFPBx4tGu2MbS3k0Aws"
-import google.generativeai as genai
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
 USER_AVATAR = "👤"
