@@ -11,14 +11,12 @@ from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-# Set your Google API Key here. It's recommended to use environment variables for security.
-#load_dotenv()
-#os.getenv("GOOGLE_API_KEY")
-#genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-os.environ["GOOGLE_API_KEY"] = "AIzaSyDhaendGvFHUO_YxFPBx4tGu2MbS3k0Aws"
+
+load_dotenv()
+os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
-USER_AVATAR = "👤"
+USER_AVATAR = "😊"
 BOT_AVATAR = "🤖"
 
 def get_pdf_text(pdf_docs):
@@ -70,14 +68,14 @@ def save_chat_history(messages):
 
 def main():
     """Main function to run the Streamlit app with UI and performance improvements."""
-    st.title("🧠 PDF Chatbot")
+    st.title("🗎 PDF Chatbot ከ PDF ዎ ጋር ያውጉ 😂")
 
     if "messages" not in st.session_state:
         st.session_state.messages = load_chat_history()
 
     if "input_key" not in st.session_state:
         st.session_state.input_key = 0  # Initialize input key for clearing input field
-
+    
     with st.sidebar:
         st.title("Your Chats")
         pdf_docs = st.file_uploader("Upload PDF Files:", accept_multiple_files=True, type=["pdf"])
@@ -95,9 +93,9 @@ def main():
 
     display_chat_history()
 
-    user_query = st.text_input("How can I assist?", key=f"user_query_{st.session_state.input_key}")
-    if st.button("Send") and user_query:
-        with st.spinner("Thinking..."):  # Feedback during bot response generation
+    user_query = st.text_input("Talk with your PDF?", key=f"user_query_{st.session_state.input_key}")
+    if st.button("ASK") and user_query:
+        with st.spinner("Reading..."):  # Feedback during bot response generation
             process_user_query(user_query)
         st.session_state.input_key += 1  # Clears the input field after submission
 
@@ -105,7 +103,6 @@ def display_chat_history():
     """Enhanced chat history display with improved UI."""
     st.markdown("### Chat History")
     for msg in st.session_state.messages:
-        # Use columns for layout improvements
         col1, col2 = st.columns([1, 15])
         with col1:
             st.markdown(f"{msg['avatar']}")
